@@ -52,7 +52,7 @@ python3 tests/browser_smoke.py http://127.0.0.1:8001
 
 ## 访问统计（Umami Cloud）
 
-生产首页加载 Umami 官方脚本 `https://cloud.umami.is/script.js`，使用公开 Website ID `be54261d-7a2b-4a9a-8414-2f820fb9a4b1`。`data-domains` 限定为 `dongping-tan.github.io`，避免正常的 localhost 开发访问进入生产统计。该域名下其他项目只有安装了同一脚本才会上报；在 Umami 中按 `/tanvior-homepage/` 路径筛选可查看本站页面。
+生产首页加载 Umami 官方脚本 `https://cloud.umami.is/script.js`，使用公开 Website ID `be54261d-7a2b-4a9a-8414-2f820fb9a4b1`。`data-domains` 允许 `dongping-tan.github.io`、`www.tanvior.com` 和 `tanvior.com`，避免正常的 localhost 开发访问进入生产统计。GitHub Pages 域名下其他项目只有安装了同一脚本才会上报。正式域名与 GitHub Pages 共用一个 Website ID；在 Umami 中可按主机名和路径区分访问。
 
 在 Umami Cloud 登录自己的账号，打开 Tanvior 网站统计，选择 **Today / 今天**，查看 **Visitors / 访客** 与 **Views / 浏览次数**。按需检查后台时区；日本自然日应选择 `Asia/Tokyo`（或后台相应时区设置）。访客是统计服务的估算，不等于精确自然人数，广告拦截器和网络故障可能造成漏计；新接入前的历史访问无法补回。
 

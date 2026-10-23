@@ -23,7 +23,7 @@
     }
     return result;
   }
-  function schedule(input, language = "zh") {
+  function schedule(input, language = "zh", translatedPhases, emptyMessage) {
     const dates = datesBetween(input.start, input.end);
     const entries = dates.flatMap((date) =>
       slots
@@ -38,16 +38,18 @@
     );
     if (!entries.length)
       throw new Error(
-        language === "zh"
-          ? "请至少选择一个可用时间块。"
-          : "Select at least one available time slot.",
+        emptyMessage ??
+          (language === "zh"
+            ? "请至少选择一个可用时间块。"
+            : "Select at least one available time slot."),
       );
     return entries.map((entry, index) => {
       const phase = Math.min(2, Math.floor((index * 3) / entries.length));
       const labels =
-        language === "zh"
+        translatedPhases ??
+        (language === "zh"
           ? ["基础梳理", "专项实践", "复盘与验收"]
-          : ["Build foundations", "Focused practice", "Review and assess"];
+          : ["Build foundations", "Focused practice", "Review and assess"]);
       return { ...entry, title: `${labels[phase]} · ${input.goal}`, phase };
     });
   }

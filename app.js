@@ -4,183 +4,20 @@ const P = window.Planner;
 const $ = (selector) => document.querySelector(selector);
 const KEY = "tanvior.workspace.v1";
 const colors = ["#718a53", "#bb855f", "#648e9b", "#9a7ba0", "#ba9e46"];
-const copy = {
-  zh: {
-    tagline: "把时间，留给想成为的自己",
-    language: "语言",
-    workspace: "我的空间",
-    projects: "目标与计划",
-    newTask: "＋ 新建任务",
-    note: "小步前进，也在靠近。你的每一次投入，都算数。",
-    about: "关于 Tanvior ↗",
-    overview: "给成长一点空间。",
-    local: "本地规则规划 · 无需联网",
-    emptyTitle: "下一个目标，从这里开始",
-    emptyText:
-      "写下你想达成的事，选好属于它的时间。Tanvior 帮你把方向拆成可执行的日常。",
-    start: "创建第一个目标 →",
-    foot: "按你的节奏，持续向前。拖动卡片顶部可调整位置。",
-    calendar: "日历与安排",
-    today: "今天的小步",
-    privacy:
-      "◈ 任务数据保存在当前浏览器，请定期备份。本站使用 Umami 进行访问统计。",
-    editorTitle: "给你的目标，一个计划",
-    taskName: "任务名称",
-    startDate: "开始日期",
-    endDate: "预计完成日期",
-    weekly: "每周可用时间（每块 1 小时）",
-    adjust: "微调具体日期 · 添加或移除时间块",
-    adjustHelp: "多选日期后批量添加或移除；也可单独调整某一天。",
-    selectDate: "选择日期",
-    allow: "添加时间",
-    remove: "移除时间",
-    goal: "想达成的事项 / 能力目标",
-    baseline: "现阶段状态",
-    plannerHint:
-      "依据可用时间，按基础、实践、验收三阶段生成。本地规则规划，不调用 AI，不承诺实际达成结果。",
-    generate: "✳ 智能生成计划（本地规则）",
-    chooseMonth: "选择月份",
-    aboutText:
-      "Tanvior 将目标、可用时间、每日行动与进度放在同一个工作台。本版本使用本地规则生成三阶段计划，不连接 AI 服务或云端账户。请定期导出记录。",
-    total: "进行中的目标",
-    sessions: "行动时间块",
-    average: "整体进度",
-    unit: "个",
-    noToday: "今天没有安排。留点时间给自己，或开始一个新目标。",
-    none: "这一天没有安排。",
-    target: "能力目标",
-    initial: "开始时状态",
-    period: "计划周期",
-    mark: "标记",
-    unmark: "取消标记",
-    delete: "删除",
-    confirm: "删除此任务及其全部进度？此操作无法撤销。",
-    reason: "规划内容与原因",
-    reasonText:
-      "按可用时间顺序分为基础梳理、专项实践、复盘验收三个阶段；每个时间块 1 小时，阶段边界按时间块数量均分。任务目标用于描述每次行动方向，当前状态保留供你对照。此规则无法评估真实难度，请根据实际情况调整目标。",
-    milestone: "预计完成 / 能力目标",
-    week: "周",
-    print: "打印 / PDF",
-    word: "Word (.doc)",
-    excel: "Excel (.xls)",
-    backup: "备份 JSON",
-    date: "日期",
-    time: "时间",
-    task: "任务",
-    action: "行动内容",
-    progress: "完成 %",
-    month: "月度安排",
-    emptyMonth: "本月暂无安排",
-    invalid: "请填写有效日期，且结束日期不得早于开始日期，周期最长 366 天。",
-    saved: "已保存",
-    storage: "浏览器无法保存数据，请导出备份并检查存储权限。",
-    corrupt:
-      "本地数据无法读取，原始数据未覆盖。请先导出备份，再检查浏览器存储。",
-    conflict: "提示：部分时间与其他任务重叠，请检查日历安排。",
-    selected: "已选日期",
-    override: "微调",
-    hours: "小时",
-    addDateError: "请选择计划周期内的日期。",
-    noDate: "请先选择日期。",
-    importBackup: "导入备份",
-    restoreConfirm: "导入将替换当前任务。请先备份当前数据。是否继续？",
-    invalidBackup: "备份格式无效，未修改当前数据。",
-    restored: "备份已恢复",
-  },
-  en: {
-    tagline: "Make time for who you want to become",
-    language: "Language",
-    workspace: "MY WORKSPACE",
-    projects: "Goals & plans",
-    newTask: "+ New goal",
-    note: "Small steps still move you forward. Every moment counts.",
-    about: "About Tanvior ↗",
-    overview: "Make room for growth.",
-    local: "Local rule-based planner · Offline",
-    emptyTitle: "Your next chapter starts here",
-    emptyText:
-      "Choose a goal. Make room for it. Turn your direction into everyday actions.",
-    start: "Create your first goal →",
-    foot: "Move at your own pace. Drag a card header to arrange your workspace.",
-    calendar: "Calendar & schedule",
-    today: "Small steps for today",
-    privacy:
-      "◈ Goal data stays in this browser; export backups regularly. This site uses Umami for visitor analytics.",
-    editorTitle: "Give your goal a plan",
-    taskName: "Goal name",
-    startDate: "Start date",
-    endDate: "Expected completion",
-    weekly: "Weekly availability (1 hour per slot)",
-    adjust: "Adjust individual dates · Add or remove slots",
-    adjustHelp: "Select several dates for bulk changes, or adjust one date.",
-    selectDate: "Select date",
-    allow: "Add slot",
-    remove: "Remove slot",
-    goal: "Desired outcome / capability",
-    baseline: "Current starting point",
-    plannerHint:
-      "Plans use three rule-based stages: foundations, practice, and review. No AI service is called and outcomes are not guaranteed.",
-    generate: "✳ Generate plan (local rules)",
-    chooseMonth: "Choose month",
-    aboutText:
-      "Tanvior brings goals, available time, daily actions, and progress into one workspace. This version uses local planning rules, without AI services or cloud accounts. Export your records regularly.",
-    total: "Active goals",
-    sessions: "Action time slots",
-    average: "Overall progress",
-    unit: "",
-    noToday:
-      "Nothing scheduled today. Make room for yourself or start a new goal.",
-    none: "No sessions on this day.",
-    target: "Desired capability",
-    initial: "Starting point",
-    period: "Planning period",
-    mark: "Mark",
-    unmark: "Unmark",
-    delete: "Delete",
-    confirm: "Delete this goal and all its progress? This cannot be undone.",
-    reason: "Plan and rationale",
-    reasonText:
-      "Available slots are ordered and divided into foundations, focused practice, and review. Each slot is one hour. Stage boundaries divide the slot count into thirds. The goal describes each action; the baseline is retained for comparison. These rules cannot assess real difficulty; adjust your expectations as needed.",
-    milestone: "Expected completion / outcome",
-    week: "Week",
-    print: "Print / PDF",
-    word: "Word (.doc)",
-    excel: "Excel (.xls)",
-    backup: "JSON backup",
-    date: "Date",
-    time: "Time",
-    task: "Goal",
-    action: "Action",
-    progress: "Complete %",
-    month: "Monthly schedule",
-    emptyMonth: "No sessions this month",
-    invalid:
-      "Use valid dates, with the end on or after the start, within 366 days.",
-    saved: "Saved",
-    storage:
-      "Browser storage is unavailable. Export a backup and check storage permissions.",
-    corrupt:
-      "Stored data could not be read; it has not been overwritten. Export a backup before checking browser storage.",
-    conflict: "Some slots overlap other goals. Please check the calendar.",
-    selected: "Selected dates",
-    override: "Override",
-    hours: "hours",
-    addDateError: "Choose a date within the planning period.",
-    noDate: "Select a date first.",
-    importBackup: "Import backup",
-    restoreConfirm:
-      "Import replaces your current goals. Back up your data first. Continue?",
-    invalidBackup: "Invalid backup; current data was not changed.",
-    restored: "Backup restored",
-  },
-};
-let state = { tasks: [], language: "zh" },
+const I18n = window.TanviorI18n;
+const copy = I18n.copy;
+let languageChosen = false;
+const browserLanguages = navigator.languages?.length
+  ? [...navigator.languages]
+  : [navigator.language];
+
+let state = { tasks: [], language: I18n.browserLanguage(browserLanguages) },
   rawBackup = null,
   storageBlocked = false;
 function validState(value) {
   return (
     value &&
-    ["zh", "en"].includes(value.language) &&
+    I18n.supported.includes(value.language) &&
     Array.isArray(value.tasks) &&
     value.tasks.length <= 100 &&
     new Set(value.tasks.map((t) => t.id)).size === value.tasks.length &&
@@ -223,6 +60,7 @@ try {
     const parsed = JSON.parse(raw);
     if (!validState(parsed)) throw new Error("Invalid schema");
     state = parsed;
+    languageChosen = true;
   }
 } catch {
   storageBlocked = true;
@@ -239,11 +77,14 @@ let selected = state.tasks[0]?.id,
 month.setDate(1);
 const t = (key) => copy[state.language][key] ?? key;
 const esc = P.escapeXML;
-const locale = () => (state.language === "zh" ? "zh-CN" : "en-US");
+const locale = () => I18n.locales[state.language];
 const weekdays = () =>
-  state.language === "zh"
-    ? ["日", "一", "二", "三", "四", "五", "六"]
-    : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+  Array.from({ length: 7 }, (_, day) =>
+    new Intl.DateTimeFormat(locale(), { weekday: "short" }).format(
+      new Date(2024, 0, 7 + day),
+    ),
+  );
+
 function notice(message) {
   $("#notice").textContent = message;
   $("#notice").hidden = false;
@@ -284,14 +125,14 @@ function focusTask(id) {
   }
 }
 function render() {
-  document.documentElement.lang = state.language === "zh" ? "zh-CN" : "en";
-  document.title =
-    state.language === "zh"
-      ? "Tanvior · 让目标成为日常"
-      : "Tanvior · Make room for growth";
+  document.documentElement.lang = locale();
+  document.title = `Tanvior · ${t("introTitle")}`;
   document
     .querySelectorAll("[data-i18n]")
     .forEach((el) => (el.textContent = t(el.dataset.i18n)));
+  document
+    .querySelectorAll("[data-i18n-aria]")
+    .forEach((el) => el.setAttribute("aria-label", t(el.dataset.i18nAria)));
   $("#language").value = state.language;
   $("#today-date").textContent = new Date().toLocaleDateString(locale(), {
     year: "numeric",
@@ -400,7 +241,7 @@ function renderToday() {
     ? events
         .map(
           ({ task, session, index }) =>
-            `<div class="today-item"><button data-focus="${task.id}"><i class="dot" style="background:${task.color}"></i> ${esc(task.name)} · ${session.time}</button><small>${esc(session.title)}</small><label>${t("progress")} <input type="number" min="0" max="100" step="1" value="${session.progress}" data-progress="${task.id}" data-index="${index}" aria-label="Today ${esc(task.name)} ${session.time}" style="width:65px;margin-top:8px"></label></div>`,
+            `<div class="today-item"><button data-focus="${task.id}"><i class="dot" style="background:${task.color}"></i> ${esc(task.name)} · ${session.time}</button><small>${esc(session.title)}</small><label>${t("progress")} <input type="number" min="0" max="100" step="1" value="${session.progress}" data-progress="${task.id}" data-index="${index}" aria-label="${esc(t("today"))} ${esc(task.name)} ${session.time}" style="width:65px;margin-top:8px"></label></div>`,
         )
         .join("")
     : `<p class="muted">${t("noToday")}</p>`;
@@ -445,7 +286,7 @@ function renderOverrides() {
     .sort()
     .map(
       ([key, value]) =>
-        `<div>${key} · ${t(value ? "allow" : "remove")} <button type="button" class="text-button" data-clear-override="${key}" aria-label="Clear ${key}">×</button></div>`,
+        `<div>${key} · ${t(value ? "allow" : "remove")} <button type="button" class="text-button" data-clear-override="${key}" aria-label="${esc(t("clear"))} ${key}">×</button></div>`,
     )
     .join("");
 }
@@ -464,17 +305,11 @@ $("#task-form").addEventListener("submit", (event) => {
     overrides,
   };
   if (!input.name || !input.goal || !input.baseline) {
-    $("#form-error").textContent =
-      state.language === "zh"
-        ? "请输入名称、目标与当前状态。"
-        : "Enter a name, outcome and starting point.";
+    $("#form-error").textContent = t("requiredFields");
     return;
   }
   if (state.tasks.length >= 100) {
-    $("#form-error").textContent =
-      state.language === "zh"
-        ? "最多保留 100 个目标，请先导出并删除已完成目标。"
-        : "Limit: 100 goals. Export and remove completed goals first.";
+    $("#form-error").textContent = t("taskLimit");
     return;
   }
   let sessions;
@@ -485,7 +320,12 @@ $("#task-form").addEventListener("submit", (event) => {
     return;
   }
   try {
-    sessions = P.schedule(input, state.language);
+    sessions = P.schedule(
+      input,
+      state.language,
+      [t("phase0"), t("phase1"), t("phase2")],
+      t("emptySchedule"),
+    );
   } catch (error) {
     $("#form-error").textContent = error.message;
     return;
@@ -516,9 +356,20 @@ $("#task-form").addEventListener("submit", (event) => {
 $("#new-task").onclick = openEditor;
 $("#empty-new").onclick = openEditor;
 $("#language").onchange = (event) => {
+  languageChosen = true;
   state.language = event.target.value;
   save();
   render();
+  if ($("#editor").open) {
+    const checked = [
+      ...document.querySelectorAll('[name="weekly"]:checked'),
+    ].map((el) => el.value);
+    buildWeekly();
+    document
+      .querySelectorAll('[name="weekly"]')
+      .forEach((el) => (el.checked = checked.includes(el.value)));
+    renderOverrides();
+  }
   if ($("#month-dialog").open) renderMonthTable();
 };
 $("#about").onclick = () => $("#about-dialog").showModal();
@@ -780,6 +631,7 @@ importInput.onchange = async () => {
     if (!validState(value)) throw new Error("Invalid schema");
     if (!confirm(t("restoreConfirm"))) return;
     state = value;
+    languageChosen = true;
     storageBlocked = false;
     rawBackup = null;
     selected = state.tasks[0]?.id;
@@ -807,6 +659,27 @@ try {
 } catch {}
 if (!$("#intro").hidden) introTimer = setTimeout(enter, 15000);
 render();
+if (!languageChosen && !storageBlocked) {
+  I18n.detectLanguage(browserLanguages).then((language) => {
+    // A manual selection or imported backup always wins a pending IP lookup.
+    if (languageChosen) return;
+    state.language = language;
+    languageChosen = true;
+    save();
+    render();
+    if ($("#editor").open) {
+      const checked = [
+        ...document.querySelectorAll('[name="weekly"]:checked'),
+      ].map((el) => el.value);
+      buildWeekly();
+      document
+        .querySelectorAll('[name="weekly"]')
+        .forEach((el) => (el.checked = checked.includes(el.value)));
+      renderOverrides();
+    }
+    if ($("#month-dialog").open) renderMonthTable();
+  });
+}
 if (storageBlocked) notice(t("corrupt"));
 // Refresh local date highlights when a tab is resumed or crosses midnight.
 let lastDate = P.dateKey();

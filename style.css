@@ -913,3 +913,24 @@ th {
     margin: 15mm;
   }
 }
+
+.language-globe {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.intro h1 {
+  max-width: 700px;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 700px) {
+  .intro h1 {
+    font-size: clamp(38px, 10vw, 60px);
+  }
+  .language {
+    gap: 6px;
+  }
+  .language select {
+    max-width: 115px;
+  }
+}

@@ -49,3 +49,13 @@ python3 tests/browser_smoke.py http://127.0.0.1:8001
 测试涵盖任务生成、具体日期覆盖、进度与持久化、标记/删除、日历、拖动、语言、文件导出与 PDF、备份恢复、损坏存储保护、移动布局、介绍页计时和旧链接兼容。截图输出至 `/tmp/tanvior-desktop.png` 和 `/tmp/tanvior-mobile.png`，不提交生成文件。
 
 详见 [需求对照与后续阶段](docs/requirements.md)。
+
+## 访问统计（Umami Cloud）
+
+生产首页加载 Umami 官方脚本 `https://cloud.umami.is/script.js`，使用公开 Website ID `be54261d-7a2b-4a9a-8414-2f820fb9a4b1`。`data-domains` 限定为 `dongping-tan.github.io`，避免正常的 localhost 开发访问进入生产统计。该域名下其他项目只有安装了同一脚本才会上报；在 Umami 中按 `/tanvior-homepage/` 路径筛选可查看本站页面。
+
+在 Umami Cloud 登录自己的账号，打开 Tanvior 网站统计，选择 **Today / 今天**，查看 **Visitors / 访客** 与 **Views / 浏览次数**。按需检查后台时区；日本自然日应选择 `Asia/Tokyo`（或后台相应时区设置）。访客是统计服务的估算，不等于精确自然人数，广告拦截器和网络故障可能造成漏计；新接入前的历史访问无法补回。
+
+本次仅接入标准页面访问统计，不添加自定义事件、不把任务名称、目标、现状、计划、备份或 localStorage 内容发送给 Umami。标准脚本仍会处理页面访问相关元数据，避免在 URL 或页面标题中放置敏感内容。访问提示已同步更新中英文。统计脚本不可用时，规划功能仍可独立使用。
+
+Website ID 是公开站点标识，不是后台登录凭据。账号密码与私密 API 密钥不应写入仓库。当前尚未实现网站内私人管理页：GitHub Pages 无法提供服务端登录保护，且当前免费套餐的私人统计 API 能力未确认。请先使用 Umami 账号保护的后台；不将统计面板公开分享或嵌入以替代访问保护。

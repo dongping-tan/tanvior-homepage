@@ -22,7 +22,8 @@ const copy = {
     foot: "按你的节奏，持续向前。拖动卡片顶部可调整位置。",
     calendar: "日历与安排",
     today: "今天的小步",
-    privacy: "◈ 数据保存在当前浏览器。清除浏览器数据前，请导出备份。",
+    privacy:
+      "◈ 任务数据保存在当前浏览器，请定期备份。本站使用 Umami 进行访问统计。",
     editorTitle: "给你的目标，一个计划",
     taskName: "任务名称",
     startDate: "开始日期",
@@ -104,7 +105,7 @@ const copy = {
     calendar: "Calendar & schedule",
     today: "Small steps for today",
     privacy:
-      "◈ Data stays in this browser. Export a backup before clearing browser data.",
+      "◈ Goal data stays in this browser; export backups regularly. This site uses Umami for visitor analytics.",
     editorTitle: "Give your goal a plan",
     taskName: "Goal name",
     startDate: "Start date",

@@ -17,6 +17,8 @@ KEY = 'tanvior.workspace.v1'
 with sync_playwright() as p, tempfile.TemporaryDirectory() as out:
     browser = p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH') or shutil.which('chromium'))
     page = browser.new_page(viewport={'width': 1440, 'height': 1000}, accept_downloads=True)
+    # Keep smoke tests out of production analytics and verify offline resilience.
+    page.route('https://cloud.umami.is/**', lambda route: route.abort())
     errors = []
     page.on('pageerror', lambda e: errors.append(str(e)))
     page.goto(BASE)
